@@ -94,6 +94,7 @@ OPTIONS.extra_script = None
 OPTIONS.aslr_mode = True
 OPTIONS.worker_threads = 3
 OPTIONS.two_step = False
+OPTIONS.backuptool = True
 
 def MostPopularKey(d, default):
   """Given a dict, return the key corresponding to the largest
@@ -477,6 +478,11 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
 
   device_specific.FullOTA_InstallBegin()
 
+  if OPTIONS.backuptool:
+    script.Mount("/system")
+    script.RunBackup("backup")
+    script.Unmount("/system")
+
   script.ShowProgress(0.5, 0)
 
   if OPTIONS.wipe_user_data:
@@ -506,6 +512,10 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
   script.ShowProgress(0.2, 0)
+
+  if OPTIONS.backuptool:
+    script.ShowProgress(0.2, 10)
+    script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
   script.WriteRawImage("/boot", "boot.img")
