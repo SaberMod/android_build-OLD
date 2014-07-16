@@ -117,4 +117,3 @@ $(info   GCC_VERSION_KERNEL_VARIANT=$(SM_ARM_VERSION))
 endif
 $(info ============================================)
 endif
-endif
