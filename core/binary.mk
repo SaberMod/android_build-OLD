@@ -362,7 +362,7 @@ endif
 # Only check for HOST_CC version, since it will be the same as HOST_C++ version
 ifeq (1,$(words $(filter oatdump dex2oat, $(LOCAL_MODULE))))
 ifneq ($(filter 4.8 4.8.% 4.9 4.9.% 4.10 4.10.%, $(shell $(HOST_CC) --version)),)
-ifdef LOCAL_LDLIBS
+ifneq ($(LOCAL_LDLIBS)),)
 LOCAL_LDLIBS += -ldl -lpthread
 else
 LOCAL_LDLIBS := -ldl -lpthread
