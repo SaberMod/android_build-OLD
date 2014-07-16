@@ -357,6 +357,20 @@ LOCAL_STATIC_LIBRARIES += libprotobuf-cpp-2.3.0-lite
 endif
 endif
 
+# Pthread support wip
+# Required for linux-i686-4.8 TC
+ifeq (1,$(words $(filter oatdump dex2oat, $(LOCAL_MODULE))))
+ifdef LOCAL_LDLIBS
+LOCAL_LDLIBS += -ldl -lpthread
+else
+LOCAL_LDLIBS := -ldl -lpthread
+endif
+ifeq ($(HOST_OS),linux)
+LOCAL_LDLIBS += -lrt
+endif
+LOCAL_CFLAGS += -pthread
+LOCAL_CPPFLAGS += -pthread
+endif
 
 ###########################################################
 ## YACC: Compile .y files to .cpp and the to .o.
