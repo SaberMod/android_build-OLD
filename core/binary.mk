@@ -375,6 +375,14 @@ LOCAL_CPPFLAGS += -pthread
 endif
 endif
 
+ifeq (1,$(words $(filter $(NO_ERROR_UA), $(LOCAL_MODULE))))
+LOCAL_CFLAGS += -Wno-error=unused-parameter
+endif
+
+ifeq (1,$(words $(filter $(NO_ERROR_UP), $(LOCAL_MODULE))))
+LOCAL_CFLAGS += -Wno-error=unused-parameter
+endif
+
 ###########################################################
 ## YACC: Compile .y files to .cpp and the to .o.
 ###########################################################
