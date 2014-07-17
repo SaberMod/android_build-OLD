@@ -376,7 +376,7 @@ endif
 endif
 
 ifeq (1,$(words $(filter $(NO_ERROR_UA), $(LOCAL_MODULE))))
-LOCAL_CFLAGS += -Wno-error=unused-parameter
+LOCAL_CFLAGS += -Wno-error=unused-argument
 endif
 
 ifeq (1,$(words $(filter $(NO_ERROR_UP), $(LOCAL_MODULE))))
