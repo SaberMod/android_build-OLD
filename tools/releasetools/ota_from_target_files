@@ -814,11 +814,8 @@ else
   script.Print("Removing unneeded files...")
   script.DeleteFiles(["/"+i[0] for i in verbatim_targets] +
                      ["/"+i for i in sorted(source_data)
-                           if i not in target_data and
-                           i not in renames] +
-                     ["/system/recovery.img"])
-                           if i not in target_data])
-#                    ["/system/recovery.img"])
+                            if i not in target_data])
+#                     ["/system/recovery.img"])
 
 
   script.ShowProgress(0.8, 0)
