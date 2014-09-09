@@ -383,6 +383,11 @@ ifeq (1,$(words $(filter $(NO_ERROR_UP), $(LOCAL_MODULE))))
 LOCAL_CFLAGS += -Wno-error=unused-parameter
 endif
 
+ifneq (1,$(words $(filter $(DISABLE_GRAPHITE), $(LOCAL_MODULE))))
+LOCAL_CFLAGS += $(GRAPHITE_FLAGS)
+LOCAL_CPPFLAGS += $(GRAPHITE_FLAGS)
+endif
+
 ###########################################################
 ## YACC: Compile .y files to .cpp and the to .o.
 ###########################################################
