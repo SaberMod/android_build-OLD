@@ -388,11 +388,9 @@ LOCAL_CFLAGS += $(GRAPHITE_FLAGS)
 LOCAL_CPPFLAGS += $(GRAPHITE_FLAGS)
 endif
 
-ifneq ($(DISABLE_GNU11),true)
 ifneq (1,$(words $(filter $(DISABLE_GNU11), $(LOCAL_MODULE))))
 LOCAL_CFLAGS += $(call cc-option,-std=gnu11)
 LOCAL_CPPFLAGS += $(call cpp-option,-std=gnu++11)
-endif
 endif
 
 ###########################################################
