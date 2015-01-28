@@ -361,7 +361,7 @@ endif
 # Required for linux-i686-4.8 TC
 # Only check for HOST_CC version, since it will be the same as HOST_C++ version
 ifeq (1,$(words $(filter oatdump dex2oat, $(LOCAL_MODULE))))
-ifneq ($(filter 4.8 4.8.% 4.9 4.9.% 4.10 4.10.%, $(shell $(HOST_CC) --version)),)
+ifneq ($(filter 4.8 4.8.% 4.9 4.9.% 5.0 5.0.%, $(shell $(HOST_CC) --version)),)
 ifneq ($(LOCAL_LDLIBS)),)
 LOCAL_LDLIBS += -ldl -lpthread
 else
@@ -375,12 +375,9 @@ LOCAL_CPPFLAGS += -pthread
 endif
 endif
 
-ifeq (1,$(words $(filter $(NO_ERROR_UA), $(LOCAL_MODULE))))
-LOCAL_CFLAGS += -Wno-error=unused-argument
-endif
-
 ifeq (1,$(words $(filter $(NO_ERROR_UP), $(LOCAL_MODULE))))
 LOCAL_CFLAGS += -Wno-error=unused-parameter
+LOCAL_CPPFLAGS += -Wno-error=unused-parameter
 endif
 
 ifneq (1,$(words $(filter $(DISABLE_GRAPHITE), $(LOCAL_MODULE))))
@@ -391,6 +388,11 @@ endif
 ifneq (1,$(words $(filter $(DISABLE_GNU11), $(LOCAL_MODULE))))
 LOCAL_CFLAGS += $(call cc-option,-std=gnu11)
 LOCAL_CPPFLAGS += $(call cpp-option,-std=gnu++11)
+endif
+
+ifeq (1,$(words $(filter $(NO_ERROR_RT), $(LOCAL_MODULE))))
+LOCAL_CFLAGS += -Wno-error=return-type
+LOCAL_CPPFLAGS += -Wno-error=return-type
 endif
 
 ###########################################################
